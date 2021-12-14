@@ -1,0 +1,16 @@
+.textAlanı {
+  width: 50%;
+  height: 100%;
+  resize: none;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  outline: none;
+  font-size: 30px;
+}
+.text {
+  margin: 10px auto;
+  height: 100px;
+}
