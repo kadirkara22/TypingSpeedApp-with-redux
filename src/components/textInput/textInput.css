@@ -72,3 +72,18 @@
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
 }
+@media only screen and (max-width: 500px) {
+  .butonYenile {
+    font-size: 10px;
+  }
+  .dakika {
+    width: 50px;
+    font-size: 15px;
+  }
+  .input {
+    width: 75%;
+  }
+  .fromInput {
+    justify-content: center;
+  }
+}

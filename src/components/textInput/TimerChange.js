@@ -1,11 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { getwords, setTimer } from '../../redux/typerSpeedSlice';
 
 const TimerChange = () => {
+
+    const time = useSelector(state => state.typer.time)
+
+
+    const dispatch = useDispatch();
+    const handleClick = () => {
+        dispatch(getwords())
+
+    }
+
+
+
     return (
         <div className="timer">
-            <div className="dakika">1:00</div>
+            <div className="dakika" >{time}</div>
             <div className="button">
-                <button className="butonYenile">Yenile</button>
+                <button className="butonYenile" onClick={handleClick}>Yenile</button>
             </div>
         </div>
     )

@@ -94,3 +94,20 @@
   color: "red";
   font-size: "25px";
 }
+@media only screen and (max-width: 500px) {
+  .info {
+    font-size: 15px;
+  }
+  .ekran {
+    font-size: 12px;
+  }
+  .title1 {
+    font-size: 15px;
+  }
+  .count {
+    font-size: 30px;
+  }
+  .description {
+    font-size: 13px;
+  }
+}
