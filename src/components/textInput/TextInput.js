@@ -2,39 +2,65 @@ import React, { useEffect, useState } from 'react'
 import TimerChange from './TimerChange'
 import "./textInput.css"
 import { useDispatch, useSelector } from 'react-redux'
-import { selectedWord, setTime } from '../../redux/typerSpeedSlice'
+import { decreaseKeyWrong, decreaseWrong, increaseCorrect, increaseKeyCorrect, selectedWord, setIndex, setTime } from '../../redux/typerSpeedSlice'
 
 const TextInput = () => {
 
 
     const words = useSelector(state => state.typer.words)
+    const items = useSelector(state => state.typer.items)
+    const currentIndex = useSelector(state => state.typer.currentIndex)
     const isStarted = useSelector(state => state.typer.isStarted)
-    const time = useSelector(state => state.typer.time)
+
     const dispatch = useDispatch()
+
     const handleChange = (e) => {
         dispatch(selectedWord(e.target.value))
+
     }
-    let timer = null;
+
+    let interval = null;
     const start = () => {
-        clearInterval(timer);
-        timer = setInterval(() => {
-            dispatch(setTime(timer))
+        clearInterval(interval);
+        interval = setInterval(() => {
+            dispatch(setTime(interval))
         }, 1000)
     }
-    console.log(time)
-    const handleSubmit = (e) => {
+
+    const handleKeyDown = (e) => {
+
+        if (e.key === " ") {
+            checkWord();
+            dispatch(selectedWord(""))
+            dispatch(setIndex())
+
+        }
+
         if (e.key && isStarted === false) {
             start();
         }
 
     }
 
+    const checkWord = () => {
+        const wordToCompare = items[currentIndex];
+        const isCompare = wordToCompare === words.trim();
+
+        if (isCompare) {
+            dispatch(increaseCorrect())
+            dispatch(increaseKeyCorrect(wordToCompare.length))
+        } else {
+            dispatch(decreaseWrong())
+            dispatch(decreaseKeyWrong(wordToCompare.length))
+        }
+
+    }
 
 
     return (
         <div className="textInput">
             <div className="fromInput">
-                <input className="input" onChange={handleChange} onKeyDown={handleSubmit}></input>
+                <input className="input" type="text" onChange={handleChange} onKeyDown={handleKeyDown} value={words}></input>
             </div>
             <TimerChange />
 

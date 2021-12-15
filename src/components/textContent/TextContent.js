@@ -1,25 +1,43 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { empty, getwords } from '../../redux/typerSpeedSlice';
+import { getwords } from '../../redux/typerSpeedSlice';
 import "./textContent.css"
 const TextContent = () => {
     const items = useSelector(state => state.typer.items)
     const time = useSelector(state => state.typer.time)
+    const correct = useSelector(state => state.typer.correct)
+    const wrong = useSelector(state => state.typer.wrong)
 
     const dispatch = useDispatch();
 
-    const selectWord = () => {
 
-    }
     useEffect(() => {
         dispatch(getwords())
     }, [dispatch])
 
-
     return (
-        <div className="text">
-            <textarea className="textAlanı" value={items.join(" ")} onChange={(e) => e.target.value}></textarea>
-        </div>
+        <>
+            {
+                time !== 0 && <div className="text">
+                    <div className="textAlanı">
+                        {
+                            items.map((word, i) => (
+                                <span key={i}>
+                                    <span>
+                                        {
+                                            word.split("").map((char, index) => (
+                                                <span className={correct && "correctWord" || wrong && "wrongWord"} key={index}>{char}</span>
+                                            ))
+                                        }
+                                    </span>
+                                    <span> </span>
+                                </span>
+                            ))
+                        }
+                    </div>
+                </div>
+            }
+        </>
     )
 }
 

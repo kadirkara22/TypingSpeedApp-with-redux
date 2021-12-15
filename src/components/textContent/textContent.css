@@ -22,3 +22,9 @@
   height: 150px;
   background-color: white;
 }
+.correctWord {
+  color: green;
+}
+.wrongWord {
+  background-color: red;
+}
