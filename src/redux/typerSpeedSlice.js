@@ -9,12 +9,16 @@ export const typerSpeedSlice = createSlice({
         items: dataWords,
         words: "",
         isStarted: false,
-        time: 10,
+        time: 60,
         currentIndex: 0,
         correct: 0,
         wrong: 0,
         keyCorrect: 0,
-        keyWrong: 0
+        keyWrong: 0,
+        currentChar: "",
+        currentCarIndex: -1,
+
+
     },
     reducers: {
         getwords: (state, action) => {
@@ -25,12 +29,14 @@ export const typerSpeedSlice = createSlice({
                 [state.items[i], state.items[j]] = [state.items[j], state.items[i]];
             }
             state.isStarted = false;
-            state.time = 10;
+            state.time = 60;
             state.currentIndex = 0;
             state.correct = 0;
             state.wrong = 0;
             state.keyCorrect = 0;
             state.keyWrong = 0;
+
+
 
         },
         selectedWord: (state, action) => {
@@ -48,6 +54,7 @@ export const typerSpeedSlice = createSlice({
         },
         setIndex: (state, action) => {
             state.currentIndex += 1
+            state.currentCarIndex = -1
         },
         increaseCorrect: (state, action) => {
             state.correct += 1;
@@ -56,7 +63,7 @@ export const typerSpeedSlice = createSlice({
         },
         decreaseWrong: (state, action) => {
             state.wrong += 1;
-            state.keyWrong += 1;
+            state.keyWrong += 1
         },
         increaseKeyCorrect: (state, action) => {
             state.keyCorrect += action.payload;
@@ -68,6 +75,10 @@ export const typerSpeedSlice = createSlice({
 
         },
 
+        setCurrentChar: (state, action) => {
+            state.currentChar = action.payload
+            state.currentCarIndex += 1
+        },
 
 
     }
@@ -77,5 +88,5 @@ export const typerSpeedSlice = createSlice({
 
 
 })
-export const { getwords, selectedWord, setTime, setIndex, increaseCorrect, decreaseWrong, increaseKeyCorrect, decreaseKeyWrong } = typerSpeedSlice.actions;
+export const { getwords, selectedWord, setTime, setIndex, increaseCorrect, decreaseWrong, increaseKeyCorrect, decreaseKeyWrong, setCurrentChar } = typerSpeedSlice.actions;
 export default typerSpeedSlice.reducer

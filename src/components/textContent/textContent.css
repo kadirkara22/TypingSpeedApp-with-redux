@@ -22,9 +22,14 @@
   height: 150px;
   background-color: white;
 }
-.correctWord {
+.wordCorrect {
   color: green;
+  background-color: white;
 }
-.wrongWord {
+.wordWrong {
   background-color: red;
+  color: black;
+}
+.success {
+  background-color: rgb(196, 190, 190);
 }

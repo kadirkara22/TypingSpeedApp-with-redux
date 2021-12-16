@@ -8,8 +8,6 @@ const Sonuc = () => {
     const keyCorrect = useSelector(state => state.typer.keyCorrect)
     const keyWrong = useSelector(state => state.typer.keyWrong)
 
-    console.log(keyCorrect)
-    console.log(keyWrong)
 
     return (
         <>

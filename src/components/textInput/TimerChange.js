@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getwords, setTimer } from '../../redux/typerSpeedSlice';
+import { getwords, selectedWord, setTimer } from '../../redux/typerSpeedSlice';
 
 const TimerChange = () => {
 
@@ -10,6 +10,7 @@ const TimerChange = () => {
     const dispatch = useDispatch();
     const handleClick = () => {
         dispatch(getwords())
+        dispatch(selectedWord(""))
 
     }
 

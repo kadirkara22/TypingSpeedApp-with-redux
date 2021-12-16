@@ -2,15 +2,18 @@ import React, { useEffect, useState } from 'react'
 import TimerChange from './TimerChange'
 import "./textInput.css"
 import { useDispatch, useSelector } from 'react-redux'
-import { decreaseKeyWrong, decreaseWrong, increaseCorrect, increaseKeyCorrect, selectedWord, setIndex, setTime } from '../../redux/typerSpeedSlice'
+import { decreaseKeyWrong, decreaseWrong, increaseCorrect, increaseKeyCorrect, selectedWord, setCurrentChar, setIndex, setTime } from '../../redux/typerSpeedSlice'
 
 const TextInput = () => {
 
 
     const words = useSelector(state => state.typer.words)
     const items = useSelector(state => state.typer.items)
+    const time = useSelector(state => state.typer.time)
     const currentIndex = useSelector(state => state.typer.currentIndex)
     const isStarted = useSelector(state => state.typer.isStarted)
+
+
 
     const dispatch = useDispatch()
 
@@ -33,7 +36,8 @@ const TextInput = () => {
             checkWord();
             dispatch(selectedWord(""))
             dispatch(setIndex())
-
+        } else {
+            dispatch(setCurrentChar(e.key))
         }
 
         if (e.key && isStarted === false) {
@@ -60,7 +64,7 @@ const TextInput = () => {
     return (
         <div className="textInput">
             <div className="fromInput">
-                <input className="input" type="text" onChange={handleChange} onKeyDown={handleKeyDown} value={words}></input>
+                <input className="input" type="text" onChange={handleChange} onKeyDown={handleKeyDown} value={time === 0 ? "" : words}></input>
             </div>
             <TimerChange />
 
